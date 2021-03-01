@@ -1861,10 +1861,10 @@ function getTypedArrayTypeForGLType(type) {
 
 const isArrayBuffer = typeof SharedArrayBuffer !== 'undefined'
   ? function isArrayBufferOrSharedArrayBuffer(a) {
-    return a && a.buffer && (a.buffer instanceof ArrayBuffer || a.buffer instanceof SharedArrayBuffer);
+    return a && a.buffer && a.buffer.toString && (a.buffer.toString() === "[object ArrayBuffer]" || a.buffer.toString() === "[object SharedArrayBuffer]");
   }
   : function isArrayBuffer(a) {
-    return a && a.buffer && a.buffer instanceof ArrayBuffer;
+    return a && a.buffer && a.buffer.toString && a.buffer.toString() === "[object ArrayBuffer]";
   };
 
 var typedarrays = /*#__PURE__*/Object.freeze({
